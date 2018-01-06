@@ -1,4 +1,4 @@
-# `bayes`: A Naive-Bayes classifier for node.js
+# `bayes`: A Naive-Bayes classifier for Google Apps Script
 
 
 `bayes` takes a document (piece of text), and tells you what category that document belongs to.
@@ -10,12 +10,6 @@ You can use this for categorizing any text content into any arbitrary set of **c
 - is an email **spam**, or **not spam** ?
 - is a news article about **technology**, **politics**, or **sports** ?
 - is a piece of text expressing **positive** emotions, or **negative** emotions?
-
-## Installing
-
-```
-npm install bayes
-```
 
 ## Usage
 
