@@ -1,43 +1,12 @@
 /*
     Expose our naive-bayes generator function
  */
-module.exports = function (options) {
-  return new Naivebayes(options)
-}
 
 // keys we use to serialize a classifier's state
-var STATE_KEYS = module.exports.STATE_KEYS = [
+var STATE_KEYS = [
   'categories', 'docCount', 'totalDocuments', 'vocabulary', 'vocabularySize',
   'wordCount', 'wordFrequencyCount', 'options'
 ];
-
-/**
- * Initializes a NaiveBayes instance from a JSON state representation.
- * Use this with classifier.toJson().
- *
- * @param  {String} jsonStr   state representation obtained by classifier.toJson()
- * @return {NaiveBayes}       Classifier
- */
-module.exports.fromJson = function (jsonStr) {
-  var parsed;
-  try {
-    parsed = JSON.parse(jsonStr)
-  } catch (e) {
-    throw new Error('Naivebayes.fromJson expects a valid JSON string.')
-  }
-  // init a new classifier
-  var classifier = new Naivebayes(parsed.options)
-
-  // override the classifier's state
-  STATE_KEYS.forEach(function (k) {
-    if (!parsed[k]) {
-      throw new Error('Naivebayes.fromJson: JSON string is missing an expected property: `'+k+'`.')
-    }
-    classifier[k] = parsed[k]
-  })
-
-  return classifier
-}
 
 /**
  * Given an input string, tokenize it into an array of word tokens.
@@ -270,5 +239,30 @@ Naivebayes.prototype.toJson = function () {
   return jsonStr
 }
 
+/**
+ * Initializes a NaiveBayes instance from a JSON state representation.
+ * Use this with classifier.toJson().
+ *
+ * @param  {String} jsonStr   state representation obtained by classifier.toJson()
+ * @return {NaiveBayes}       Classifier
+ */
+Naivebayes.prototype.fromJson = function (jsonStr) {
+  var parsed;
+  try {
+    parsed = JSON.parse(jsonStr)
+  } catch (e) {
+    throw new Error('Naivebayes.fromJson expects a valid JSON string.')
+  }
+  // init a new classifier
+  var classifier = new Naivebayes(parsed.options)
 
+  // override the classifier's state
+  STATE_KEYS.forEach(function (k) {
+    if (!parsed[k]) {
+      throw new Error('Naivebayes.fromJson: JSON string is missing an expected property: `'+k+'`.')
+    }
+    classifier[k] = parsed[k]
+  })
 
+  return classifier
+}
