@@ -11,12 +11,18 @@ You can use this for categorizing any text content into any arbitrary set of **c
 - is a news article about **technology**, **politics**, or **sports** ?
 - is a piece of text expressing **positive** emotions, or **negative** emotions?
 
+## Setup
+1. Select "Resources" > "Libraries..." in the Google Apps Script
+editor.
+2. Enter the project key in the "Find a Library" field, and choose "Select". 
+3. Choose a version in the dropdown box, and choose bayes as the
+identifier. 
+4. Click the "Save" button.
+
 ## Usage
 
 ```javascript
-var bayes = require('bayes')
-
-var classifier = bayes()
+var classifier = bayes.Naivebayes()
 
 // teach it positive phrases
 
