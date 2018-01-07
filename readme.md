@@ -48,7 +48,7 @@ var revivedClassifier = bayes.fromJson(stateJson)
 
 ## API
 
-### `var classifier = bayes([options])`
+### `var classifier = new bayes.Naivebayes([options])`
 
 Returns an instance of a Naive-Bayes Classifier.
 
@@ -57,7 +57,7 @@ Pass in an optional `options` object to configure the instance. If you specify a
 Eg.
 
 ```js
-var classifier = bayes({
+var classifier = new bayes.Naivebayes({
     tokenizer: function (text) { return text.split(' ') }
 })
 ```
