@@ -14,7 +14,7 @@ You can use this for categorizing any text content into any arbitrary set of **c
 ## Setup
 1. Select "Resources" > "Libraries..." in the Google Apps Script
 editor.
-2. Enter the project key in the "Find a Library" field, and choose "Select". 
+2. Enter the project key `1Mq45XEmMWDgdT7Hp55fsupTXngil0z95_wdC92OPtkMm244uer6bwhin ` in the "Find a Library" field, and choose "Select". 
 3. Choose a version in the dropdown box, and choose bayes as the
 identifier. 
 4. Click the "Save" button.
