@@ -22,7 +22,7 @@ identifier.
 ## Usage
 
 ```javascript
-var classifier = new bayes.create()
+var classifier = bayes.create()
 
 // teach it positive phrases
 
@@ -48,7 +48,7 @@ var revivedClassifier = bayes.fromJson(stateJson)
 
 ## API
 
-### `var classifier = new bayes.Naivebayes([options])`
+### `var classifier = bayes.create([options])`
 
 Returns an instance of a Naive-Bayes Classifier.
 
@@ -57,7 +57,7 @@ Pass in an optional `options` object to configure the instance. If you specify a
 Eg.
 
 ```js
-var classifier = new bayes.Naivebayes({
+var classifier = bayes.create({
     tokenizer: function (text) { return text.split(' ') }
 })
 ```
