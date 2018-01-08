@@ -1,7 +1,12 @@
 var assert = require('assert')
   , fs = require('fs')
   , path = require('path')
-  , bayes = require('../lib/naive_bayes')
+  , gas = require('gas-local')
+
+var naivebayes = gas.require('./src')
+var bayes = function(option){
+ return naivebayes.create(option)
+}
 
 describe('bayes() init', function () {
   it('valid options (falsey or with an object) do not raise Errors', function () {
@@ -153,4 +158,3 @@ describe('bayes .learn() correctness', function () {
     done()
   })
 })
-
