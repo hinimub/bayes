@@ -22,7 +22,7 @@ identifier.
 ## Usage
 
 ```javascript
-var classifier = new bayes.Naivebayes()
+var classifier = new bayes.create()
 
 // teach it positive phrases
 
