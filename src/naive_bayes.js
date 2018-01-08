@@ -1,3 +1,10 @@
+/*
+    Expose our naive-bayes generator function
+ */
+function create (options) {
+  return new Naivebayes_(options)
+}
+
 // keys we use to serialize a classifier's state
 var STATE_KEYS = [
   'categories', 'docCount', 'totalDocuments', 'vocabulary', 'vocabularySize',
@@ -19,7 +26,7 @@ function fromJson (jsonStr) {
     throw new Error('Naivebayes.fromJson expects a valid JSON string.')
   }
   // init a new classifier
-  var classifier = new Naivebayes(parsed.options)
+  var classifier = new Naivebayes_(parsed.options)
 
   // override the classifier's state
   STATE_KEYS.forEach(function (k) {
@@ -40,7 +47,7 @@ function fromJson (jsonStr) {
  * @param  {String} text
  * @return {Array}
  */
-var defaultTokenizer = function (text) {
+var defaultTokenizer_ = function (text) {
   //remove punctuation from text - remove anything that isn't a word char or a space
   var rgxPunctuation = /[^(a-zA-ZA-Яa-я0-9_)+\s]/g
 
@@ -58,7 +65,7 @@ var defaultTokenizer = function (text) {
  *   - `tokenizer`  => custom tokenization function
  *
  */
-function Naivebayes (options) {
+function Naivebayes_ (options) {
   // set options object
   this.options = {}
   if (typeof options !== 'undefined') {
@@ -68,7 +75,7 @@ function Naivebayes (options) {
     this.options = options
   }
 
-  this.tokenizer = this.options.tokenizer || defaultTokenizer
+  this.tokenizer = this.options.tokenizer || defaultTokenizer_
 
   //initialize our vocabulary and its size
   this.vocabulary = {}
@@ -97,7 +104,7 @@ function Naivebayes (options) {
  *
  * @param  {String} categoryName
  */
-Naivebayes.prototype.initializeCategory = function (categoryName) {
+Naivebayes_.prototype.initializeCategory = function (categoryName) {
   if (!this.categories[categoryName]) {
     this.docCount[categoryName] = 0
     this.wordCount[categoryName] = 0
@@ -114,7 +121,7 @@ Naivebayes.prototype.initializeCategory = function (categoryName) {
  * @param  {String} text
  * @param  {String} class
  */
-Naivebayes.prototype.learn = function (text, category) {
+Naivebayes_.prototype.learn = function (text, category) {
   var self = this
 
   //initialize category data structures if we've never seen this category
@@ -166,7 +173,7 @@ Naivebayes.prototype.learn = function (text, category) {
  * @param  {String} text
  * @return {String} category
  */
-Naivebayes.prototype.categorize = function (text) {
+Naivebayes_.prototype.categorize = function (text) {
   var self = this
     , maxProbability = -Infinity
     , chosenCategory = null
@@ -216,7 +223,7 @@ Naivebayes.prototype.categorize = function (text) {
  * @param  {String} category
  * @return {Number} probability
  */
-Naivebayes.prototype.tokenProbability = function (token, category) {
+Naivebayes_.prototype.tokenProbability = function (token, category) {
   //how many times this word has occurred in documents mapped to this category
   var wordFrequencyCount = this.wordFrequencyCount[category][token] || 0
 
@@ -235,7 +242,7 @@ Naivebayes.prototype.tokenProbability = function (token, category) {
  * @param  {Array} tokens  Normalized word array
  * @return {Object}
  */
-Naivebayes.prototype.frequencyTable = function (tokens) {
+Naivebayes_.prototype.frequencyTable = function (tokens) {
   var frequencyTable = Object.create(null)
 
   tokens.forEach(function (token) {
@@ -252,7 +259,7 @@ Naivebayes.prototype.frequencyTable = function (tokens) {
  * Dump the classifier's state as a JSON string.
  * @return {String} Representation of the classifier.
  */
-Naivebayes.prototype.toJson = function () {
+Naivebayes_.prototype.toJson = function () {
   var state = {}
   var self = this
   STATE_KEYS.forEach(function (k) {
